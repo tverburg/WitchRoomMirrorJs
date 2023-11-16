@@ -1,0 +1,30 @@
+{
+    "backgroundMusicPhase1": {
+        "url": "http://0.0.0.0:8000/bgm1.mp3",
+        "volume": 0.5
+    },
+    "backgroundMusicPhase2": {
+        "url": "http://0.0.0.0:8000/bgm2.mp3",
+        "volume": 0.5
+    },
+    "backgroundMusicPhase3": {
+        "url": "http://0.0.0.0:8000/bgm3.mp3",
+        "volume": 0.5
+    },
+    "hintReceived": {
+        "url": "http://0.0.0.0:8000/hint.mp3",
+        "volume": 0.5
+    },
+    "thunder": {
+        "url": "http://0.0.0.0:8000/thunder.mp3",
+        "volume": 0.5
+    },
+    "witch": {
+        "url": "http://0.0.0.0:8000/witch.mp3",
+        "volume": 0.5
+    },
+    "rune": {
+        "url": "http://0.0.0.0:8000/rune.mp3",
+        "volume": 0.5
+    }
+}
