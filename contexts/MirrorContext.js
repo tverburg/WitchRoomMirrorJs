@@ -9,7 +9,8 @@ export const MirrorProvider = (props) => {
     const [messages, setMessages] = useState([]);
     const [audioMessages, setAudioMessages] = useState([]);
     const [mqttConnected, setMqttConnected] = useState(false);
-
+    const [targetDate, setTargetDate] = useState();
+    const [showTimer, setShowTimer] = useState(true);
 
     const addReceivedMessage = (message, topic) => {
         console.log("addReceivedMessage");
@@ -29,6 +30,31 @@ export const MirrorProvider = (props) => {
             msgs.push(m);
             console.log(msgs);
             setAudioMessages(msgs);
+        } else if (topic.startsWith('game')) {
+            console.log("Received Game Message");
+            console.log(topic, message);
+            const [prefix, action, type] = topic.split("/"); // topics have the "game/[start/stop]" format
+
+            switch(action) {
+                case  'start': {
+                    const gameState = {...message};
+                    if(gameState.targetDate) {
+                        setTargetDate(gameState.targetDate);
+                    }
+                }
+                break;
+                case  'stop': {
+
+                }
+                break;
+                case  'update': {
+                    const update = {...message};
+                    if(update.type = 'showTime') {
+                        setShowTimer(update.value)
+                    }
+                }
+                break;
+            }
         } else {
             console.log("Received Message");
             const m = [...messages];
@@ -45,6 +71,8 @@ export const MirrorProvider = (props) => {
         mqttConnected,
         setMqttConnected,
         audioMessages,
+        targetDate,
+        showTimer,
     };
 
     return <MirrorContext.Provider value={value}>{props.children}</MirrorContext.Provider>;

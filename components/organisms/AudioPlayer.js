@@ -6,10 +6,10 @@ function AudioPlayer({ playing, id, url,options }) {
     const [play, { stop }] = useSound(url, options);
 
     useEffect(() => {
-        console.log("AudioPlayer useEffect", playing);
+        // console.log("AudioPlayer useEffect", playing);
 
         //stop
-        if (playing === 0) {
+        if (!playing) {
             console.log("stop", id);
             stop();
         }

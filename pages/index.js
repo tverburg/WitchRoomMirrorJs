@@ -3,6 +3,7 @@ import AnimatedTextCharacter from '../components/organisms/AnimatedTextCharacter
 import { MirrorContext } from '../contexts/MirrorContext';
 import { MqttService } from '../demo/service/MqttService';
 import AudioManager from '../components/organisms/AudioManager';
+import Hourglass from '../components/organisms/hourglass/Hourglass';
 //import localFont from 'next/font/local';
 
 //const myFont = localFont({ src: '../fonts/TheCrowGrunge.otf' })
@@ -12,7 +13,7 @@ const Dashboard = () => {
     const { messages } = useContext(MirrorContext);
     const [message, setMessage] = useState(null);
 
-    console.log("Dashboard | ", messages);
+    const showTime = true;
 
     useEffect(() => {
         const mqttService = new MqttService(context);
@@ -39,7 +40,6 @@ const Dashboard = () => {
 
     return (
         <div className="grid">
-
             <div className="col-12">
                 <div
                     className="container h-screen mx-auto flex flex-col"
@@ -49,9 +49,16 @@ const Dashboard = () => {
                         justifyContent: 'center',
                     }}
                 >
-                    {message && (
-                        <AnimatedTextCharacter text={message} />
-                    )}
+                    {
+                        message && (
+                            <AnimatedTextCharacter text={message} />
+                        )
+                    }
+                    {/*{*/}
+                    {/*    showTime && (*/}
+                    {/*        <Hourglass />*/}
+                    {/*    )*/}
+                    {/*}*/}
 
 
                     <div
@@ -87,7 +94,7 @@ const Dashboard = () => {
                         {/*    )*/}
                         {/*})}*/}
                     </div>
-                </div>               
+                </div>
             </div>
                         <AudioManager />
         </div>

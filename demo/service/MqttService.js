@@ -39,8 +39,8 @@ var options = {
 
 export class MqttService {
     constructor(context) {
-        console.log("MqttService construct");
-        console.log(context);
+        // console.log("MqttService construct");
+        // console.log(context);
 
         this.client = mqtt.connect("ws://localhost:8883", options);
         this.mirrorContext = context;

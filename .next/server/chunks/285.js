@@ -25,6 +25,8 @@ const MirrorProvider = (props)=>{
     const [messages, setMessages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const [audioMessages, setAudioMessages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const [mqttConnected, setMqttConnected] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+    const [targetDate, setTargetDate] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)();
+    const [showTimer, setShowTimer] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true);
     const addReceivedMessage = (message, topic)=>{
         console.log("addReceivedMessage");
         console.log(message, topic);
@@ -45,6 +47,35 @@ const MirrorProvider = (props)=>{
             msgs.push(m);
             console.log(msgs);
             setAudioMessages(msgs);
+        } else if (topic.startsWith("game")) {
+            console.log("Received Game Message");
+            console.log(topic, message);
+            const [prefix, action, type] = topic.split("/"); // topics have the "game/[start/stop]" format
+            switch(action){
+                case "start":
+                    {
+                        const gameState = {
+                            ...message
+                        };
+                        if (gameState.targetDate) {
+                            setTargetDate(gameState.targetDate);
+                        }
+                    }
+                    break;
+                case "stop":
+                    {}
+                    break;
+                case "update":
+                    {
+                        const update = {
+                            ...message
+                        };
+                        if (update.type = "showTime") {
+                            setShowTimer(update.value);
+                        }
+                    }
+                    break;
+            }
         } else {
             console.log("Received Message");
             const m = [
@@ -61,7 +92,9 @@ const MirrorProvider = (props)=>{
         addReceivedMessage,
         mqttConnected,
         setMqttConnected,
-        audioMessages
+        audioMessages,
+        targetDate,
+        showTimer
     };
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(MirrorContext.Provider, {
         value: value,
